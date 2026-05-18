@@ -1,0 +1,76 @@
+
+/*Definimos los colores y tamaños que usaremos en todo el proyecto */
+:root { /*Utilizamos root para crear variables de estilo que nos serviran de forma global en toda la aplicación*/
+/*Al usar el doble guion, se evita que nuestras variables entren en conflicto con variables de otras librerías o del navegador*/
+  /* Colores de fondo */
+  --fondo_principal:    #0d1117;  /* fondo de toda la página */
+  --fondo_tarjeta:      #161b22;  /* fondo de tarjetas y sidebar */
+  --fondo_secundario:   #21262d;  /* fondo de botones y hover */
+  --fondo_hover:        #2d333b;  /* fondo al pasar el mouse */
+
+  /* Colores de texto */
+  --texto_principal:    #e6edf3;  /* texto normal */
+  --texto_secundario:   #8b949e;  /* texto de descripción */
+  --texto_tenue:        #6e7681;  /* texto muy suave */
+
+  /* Colores de borde */
+  --borde_normal:       #30363d;  /* bordes de tarjetas */
+  --borde_resaltado:    #58a6ff;  /* borde al hacer hover */
+
+  /* Color de acento (verde GitHub) */
+  --acento:             #238636;
+  --acento_hover:       #2ea043;
+  --acento_texto:       #3fb950;
+
+  /* Colores de estado de historias */
+  --color_nueva:        #58a6ff;  /* azul */
+  --fondo_nueva:        #1c3461;
+
+  --color_activa:       #3fb950;  /* verde */
+  --fondo_activa:       #1a3d2b;
+
+  --color_finalizada:   #a371f7;  /* morado */
+  --fondo_finalizada:   #2d1f5e;
+
+  --color_impedimento:  #f85149;  /* rojo */
+  --fondo_impedimento:  #3d1a1a;
+
+  /* Tipografía */
+  --fuente_principal:   -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fuente_codigo:      'Courier New', monospace;
+
+  /* Bordes redondeados */
+  --radio_sm:   4px;
+  --radio_md:   6px;
+  --radio_lg:   8px;
+  --radio_xl:   12px;
+}
+
+/* --- RESET BASE --- */
+/* Elimina los estilos por defecto del navegador */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} /*Esta parte la utilizamos para que sin importar el navegador, nuestra ap se vea igual. (Una pequeña alegoria, podria ser aplanar el terreno en Minecraft antes de empezar a construir)*/
+
+html, body { /* Asegura que el html y body ocupen toda la altura de la ventana */
+  height: 100%;
+}
+
+body {
+  font-family: var(--fuente_principal);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texto_principal);
+  background-color: var(--fondo_principal);
+}
+
+a { /* Estilos para los enlaces */
+  color: var(--borde_resaltado);
+  text-decoration: none;
+}
+
+a:hover {  /* Estilos para los enlaces al pasar el mouse */
+  text-decoration: underline;
+}
