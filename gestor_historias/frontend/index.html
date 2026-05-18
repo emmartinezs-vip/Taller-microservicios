@@ -6,124 +6,82 @@
   <title>Gestor de Historias de Usuario</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body style="background-color: var(--fondo_principal); color: var(--texto_principal); font-family: var(--fuente_principal);">
+<body>
 
   <!-- Contenedor principal: agrupa la barra lateral y el contenido -->
-  <div class="contenedor_app" style="display: flex; width: 100%; height: 100vh; overflow: hidden;">
+  <div class="contenedor_app">
 
     <!-- BARRA LATERAL DE NAVEGACIÓN -->
-    <aside class="barra_lateral" style="width: 260px; background-color: var(--fondo_tarjeta); border-right: 1px solid var(--borde_normal); display: flex; flex-direction: column; padding: 24px 16px; flex-shrink: 0;">
+    <aside class="barra_lateral">
 
-      <!-- Encabezado de la barra lateral: logo y nombre de la app -->
-      <div class="barra_lateral_encabezado" style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding-left: 8px;">
-        <div class="barra_lateral_logo" style="background-color: var(--acento); color: #ffffff; font-weight: bold; font-size: 16px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: var(--radio_md);">GH</div>
-        <span class="barra_lateral_nombre" style="font-size: 18px; font-weight: 600;">Gestor <span style="color: var(--acento_texto);">HU</span></span>
+      <!-- Encabezado: logo y nombre de la app -->
+      <div class="barra_lateral_encabezado">
+        <div class="barra_lateral_logo">GH</div>
+        <span class="barra_lateral_nombre">Gestor <span>HU</span></span>
       </div>
 
       <!-- Enlaces de navegación -->
-      <nav class="barra_lateral_nav" style="display: flex; flex-direction: column; gap: 6px;">
-        <a href="index.html" class="enlace_nav activo" style="display: flex; align-items: center; padding: 10px 12px; background-color: var(--fondo_hover); color: var(--texto_principal); border-radius: var(--radio_md); border-left: 4px solid var(--acento_texto); font-weight: 500;">Dashboard</a>
-        <a href="paginas/sprints.html" class="enlace_nav" style="display: flex; align-items: center; padding: 10px 12px; color: var(--texto_secundario); border-radius: var(--radio_md); font-weight: 500;">Sprints</a>
-        <a href="paginas/historias.html" class="enlace_nav" style="display: flex; align-items: center; padding: 10px 12px; color: var(--texto_secundario); border-radius: var(--radio_md); font-weight: 500;">Historias</a>
-        <a href="paginas/responsables.html" class="enlace_nav" style="display: flex; align-items: center; padding: 10px 12px; color: var(--texto_secundario); border-radius: var(--radio_md); font-weight: 500;">Responsables</a>
-        <a href="paginas/reportes.html" class="enlace_nav" style="display: flex; align-items: center; padding: 10px 12px; color: var(--texto_secundario); border-radius: var(--radio_md); font-weight: 500;">Reportes</a>
+      <nav class="barra_lateral_nav">
+        <a href="index.html" class="enlace_nav activo">Dashboard</a>
+        <a href="paginas/sprints.html" class="enlace_nav">Sprints</a>
+        <a href="paginas/historias.html" class="enlace_nav">Historias</a>
+        <a href="paginas/responsables.html" class="enlace_nav">Responsables</a>
+        <a href="paginas/reportes.html" class="enlace_nav">Reportes</a>
       </nav>
 
     </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <div class="contenido_principal" style="flex: 1; display: flex; flex-direction: column; overflow-y: auto;">
+    <div class="contenido_principal">
 
-      <!-- Barra superior: título de la página actual -->
-      <div class="barra_superior" style="padding: 24px 32px; border-bottom: 1px solid var(--borde_normal); position: sticky; top: 0; background-color: var(--fondo_principal); z-index: 10;">
-        <div class="barra_superior_info">
-          <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">Dashboard</h1>
-          <p style="color: var(--texto_secundario); font-size: 14px;">Resumen general del proyecto</p>
-        </div>
+      <!-- Barra superior: título de la página -->
+      <div class="barra_superior">
+        <h1>Dashboard</h1>
+        <p>Resumen general del proyecto</p>
       </div>
 
       <!-- Cuerpo de la página -->
-      <div class="cuerpo_pagina" id="contenido_dashboard" style="padding: 32px; display: flex; flex-direction: column; gap: 32px;">
+      <div class="cuerpo_pagina">
 
         <!-- Tarjetas de estadísticas -->
-        <div class="grilla_estadisticas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+        <div class="grilla_estadisticas">
 
-          <div class="tarjeta_estadistica" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 20px;">
-            <div class="etiqueta_estadistica" style="color: var(--texto_secundario); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Sprints activos</div>
-            <div class="valor_estadistica verde" id="stat_sprints" style="font-size: 32px; font-weight: 700; font-family: var(--fuente_codigo); color: var(--color_activa);">02</div>
+          <div class="tarjeta tarjeta_estadistica">
+            <div class="etiqueta_estadistica">Sprints activos</div>
+            <div class="valor_estadistica verde" id="stat_sprints">—</div>
           </div>
 
-          <div class="tarjeta_estadistica" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 20px;">
-            <div class="etiqueta_estadistica" style="color: var(--texto_secundario); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Total historias</div>
-            <div class="valor_estadistica azul" id="stat_historias" style="font-size: 32px; font-weight: 700; font-family: var(--fuente_codigo); color: var(--color_nueva);">12</div>
+          <div class="tarjeta tarjeta_estadistica">
+            <div class="etiqueta_estadistica">Total historias</div>
+            <div class="valor_estadistica azul" id="stat_historias">—</div>
           </div>
 
-          <div class="tarjeta_estadistica" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 20px;">
-            <div class="etiqueta_estadistica" style="color: var(--texto_secundario); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Finalizadas</div>
-            <div class="valor_estadistica morado" id="stat_finalizadas" style="font-size: 32px; font-weight: 700; font-family: var(--fuente_codigo); color: var(--color_finalizada);">08</div>
+          <div class="tarjeta tarjeta_estadistica">
+            <div class="etiqueta_estadistica">Finalizadas</div>
+            <div class="valor_estadistica morado" id="stat_finalizadas">—</div>
           </div>
 
-          <div class="tarjeta_estadistica" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 20px;">
-            <div class="etiqueta_estadistica" style="color: var(--texto_secundario); font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">Impedimentos</div>
-            <div class="valor_estadistica rojo" id="stat_impedimentos" style="font-size: 32px; font-weight: 700; font-family: var(--fuente_codigo); color: var(--color_impedimento);">01</div>
+          <div class="tarjeta tarjeta_estadistica">
+            <div class="etiqueta_estadistica">Impedimentos</div>
+            <div class="valor_estadistica rojo" id="stat_impedimentos">—</div>
           </div>
 
         </div>
 
         <!-- Sección de historias recientes -->
-        <div class="encabezado_seccion" style="border-bottom: 1px solid var(--borde_normal); padding-bottom: 10px;">
-          <span class="titulo_seccion" style="font-size: 18px; font-weight: 600;">Historias recientes</span>
+        <div class="encabezado_seccion">
+          <span class="titulo_seccion">Historias recientes</span>
         </div>
 
-        <!-- Contenedor de historias con ejemplos reales mapeados desde tu CSS -->
-        <div class="grilla_historias" id="historias_recientes" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-          
-          <!-- Ejemplo Estado: Nueva -->
-          <div class="tarjeta_historia" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="background-color: var(--fondo_nueva); color: var(--color_nueva); padding: 4px 8px; border-radius: var(--radio_xl); font-size: 11px; font-weight: 600; text-transform: uppercase;">Nueva</span>
-              <span style="color: var(--texto_tenue); font-family: var(--fuente_codigo); font-size: 12px;">HU-04</span>
-            </div>
-            <h3 style="font-size: 16px; font-weight: 600;">Diseñar Base de Datos</h3>
-            <p style="color: var(--texto_secundario); font-size: 13px;">Estructurar las tablas para sprints e historias utilizando MySQL.</p>
-          </div>
-
-          <!-- Ejemplo Estado: Activa -->
-          <div class="tarjeta_historia" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="background-color: var(--fondo_activa); color: var(--color_activa); padding: 4px 8px; border-radius: var(--radio_xl); font-size: 11px; font-weight: 600; text-transform: uppercase;">Activa</span>
-              <span style="color: var(--texto_tenue); font-family: var(--fuente_codigo); font-size: 12px;">HU-01</span>
-            </div>
-            <h3 style="font-size: 16px; font-weight: 600;">Maquetar el Dashboard</h3>
-            <p style="color: var(--texto_secundario); font-size: 13px;">Crear la estructura HTML principal y conectar las variables del CSS root.</p>
-          </div>
-
-          <!-- Ejemplo Estado: Impedimento -->
-          <div class="tarjeta_historia" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="background-color: var(--fondo_impedimento); color: var(--color_impedimento); padding: 4px 8px; border-radius: var(--radio_xl); font-size: 11px; font-weight: 600; text-transform: uppercase;">Impedimento</span>
-              <span style="color: var(--texto_tenue); font-family: var(--fuente_codigo); font-size: 12px;">HU-03</span>
-            </div>
-            <h3 style="font-size: 16px; font-weight: 600;">Conexión con la API</h3>
-            <p style="color: var(--texto_secundario); font-size: 13px;">Error de CORS al intentar hacer fetch a los endpoints locales en js/api.js.</p>
-          </div>
-
-          <!-- Ejemplo Estado: Finalizada -->
-          <div class="tarjeta_historia" style="background-color: var(--fondo_tarjeta); border: 1px solid var(--borde_normal); border-radius: var(--radio_lg); padding: 16px; display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="background-color: var(--fondo_finalizada); color: var(--color_finalizada); padding: 4px 8px; border-radius: var(--radio_xl); font-size: 11px; font-weight: 600; text-transform: uppercase;">Finalizada</span>
-              <span style="color: var(--texto_tenue); font-family: var(--fuente_codigo); font-size: 12px;">HU-02</span>
-            </div>
-            <h3 style="font-size: 16px; font-weight: 600;">Definir Variables CSS</h3>
-            <p style="color: var(--texto_secundario); font-size: 13px;">Establecer la paleta GitHub Dark Mode en el selector root del proyecto.</p>
-          </div>
-
+        <!-- Aquí JavaScript insertará las tarjetas de historias -->
+        <div class="grilla_historias" id="historias_recientes">
+          <p class="texto_tenue">Cargando...</p>
         </div>
 
-      </div>
-    </div>
+      </div><!-- cierra cuerpo_pagina -->
+    </div><!-- cierra contenido_principal -->
 
-  </div>
+  </div><!-- cierra contenedor_app -->
 
   <!-- Scripts: api.js primero porque app.js lo necesita -->
   <script src="js/api.js"></script>

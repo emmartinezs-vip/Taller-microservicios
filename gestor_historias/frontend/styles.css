@@ -1,7 +1,11 @@
+/* ================================================
+   GESTOR DE HISTORIAS DE USUARIO
+   styles.css — Estilos centralizados
+   Tema: oscuro inspirado en GitHub
+   ================================================ */
 
-/*Definimos los colores y tamaños que usaremos en todo el proyecto */
-:root { /*Utilizamos root para crear variables de estilo que nos serviran de forma global en toda la aplicación*/
-/*Al usar el doble guion, se evita que nuestras variables entren en conflicto con variables de otras librerías o del navegador*/
+/* Definimos los colores y tamaños que usaremos en todo el proyecto */
+:root {
   /* Colores de fondo */
   --fondo_principal:    #0d1117;  /* fondo de toda la página */
   --fondo_tarjeta:      #161b22;  /* fondo de tarjetas y sidebar */
@@ -44,7 +48,10 @@
   --radio_md:   6px;
   --radio_lg:   8px;
   --radio_xl:   12px;
+
+  --bg_input: #0d1117;  /* fondo de los inputs */
 }
+
 
 /* --- RESET BASE --- */
 /* Elimina los estilos por defecto del navegador */
@@ -52,9 +59,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-} /*Esta parte la utilizamos para que sin importar el navegador, nuestra ap se vea igual. (Una pequeña alegoria, podria ser aplanar el terreno en Minecraft antes de empezar a construir)*/
+}
 
-html, body { /* Asegura que el html y body ocupen toda la altura de la ventana */
+html, body {
   height: 100%;
 }
 
@@ -66,11 +73,489 @@ body {
   background-color: var(--fondo_principal);
 }
 
-a { /* Estilos para los enlaces */
+a {
   color: var(--borde_resaltado);
   text-decoration: none;
 }
 
-a:hover {  /* Estilos para los enlaces al pasar el mouse */
+a:hover {
   text-decoration: underline;
 }
+
+
+/* --- CLASE BASE REUTILIZABLE PARA TARJETAS --- */
+/* Cualquier tarjeta del proyecto hereda estos estilos base */
+.tarjeta {
+  background-color: var(--fondo_tarjeta);
+  border: 1px solid var(--borde_normal);
+  border-radius: var(--radio_lg);
+  padding: 16px;
+}
+
+
+/* --- ESTADOS DE HISTORIAS --- */
+/* Reutilizable en píldoras, bordes y cualquier indicador de estado */
+.estado_nueva       { color: var(--color_nueva);        background-color: var(--fondo_nueva); }
+.estado_activa      { color: var(--color_activa);       background-color: var(--fondo_activa); }
+.estado_finalizada  { color: var(--color_finalizada);   background-color: var(--fondo_finalizada); }
+.estado_impedimento { color: var(--color_impedimento);  background-color: var(--fondo_impedimento); }
+
+
+/* --- LAYOUT PRINCIPAL --- */
+/* Pone la barra lateral y el contenido uno al lado del otro */
+.contenedor_app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* --- BARRA LATERAL --- */
+.barra_lateral {
+  width: 240px;
+  background-color: var(--fondo_tarjeta);
+  border-right: 1px solid var(--borde_normal);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 16px 0;
+}
+
+/* Encabezado de la barra lateral */
+.barra_lateral_encabezado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px 16px 16px;
+  border-bottom: 1px solid var(--borde_normal);
+  margin-bottom: 12px;
+}
+
+/* Cuadrito verde con las letras GH */
+.barra_lateral_logo {
+  width: 32px;
+  height: 32px;
+  background-color: var(--acento);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radio_md);
+  flex-shrink: 0;
+}
+
+/* Nombre de la app */
+.barra_lateral_nombre {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto_principal);
+}
+
+/* La palabra HU en verde */
+.barra_lateral_nombre span {
+  color: var(--acento_texto);
+}
+
+/* Contenedor de los enlaces */
+.barra_lateral_nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+}
+
+/* Cada enlace de navegación */
+.enlace_nav {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: var(--radio_md);
+  color: var(--texto_secundario);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 150ms ease;
+}
+
+/* Hover y activo comparten los mismos estilos */
+.enlace_nav:hover,
+.enlace_nav.activo {
+  color: var(--texto_principal);
+  background-color: var(--fondo_secundario);
+  text-decoration: none;
+}
+
+/* Solo el activo tiene la línea verde a la izquierda */
+.enlace_nav.activo {
+  border-left-color: var(--acento_texto);
+}
+
+
+/* --- CONTENIDO PRINCIPAL --- */
+.contenido_principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Barra superior */
+.barra_superior {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--borde_normal);
+  background-color: var(--fondo_principal);
+}
+
+.barra_superior h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--texto_principal);
+}
+
+.barra_superior p {
+  font-size: 12px;
+  color: var(--texto_secundario);
+  margin-top: 2px;
+}
+
+/* Cuerpo de la página */
+.cuerpo_pagina {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+
+/* --- TARJETAS DE ESTADÍSTICAS --- */
+.grilla_estadisticas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Hereda de .tarjeta, solo agrega lo específico */
+.tarjeta_estadistica {
+  /* sin estilos extra por ahora */
+}
+
+.etiqueta_estadistica {
+  font-size: 12px;
+  color: var(--texto_secundario);
+  margin-bottom: 8px;
+}
+
+.valor_estadistica {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--fuente_codigo);
+}
+
+/* Colores de los valores */
+.valor_estadistica.verde  { color: var(--color_activa); }
+.valor_estadistica.azul   { color: var(--color_nueva); }
+.valor_estadistica.morado { color: var(--color_finalizada); }
+.valor_estadistica.rojo   { color: var(--color_impedimento); }
+
+
+/* --- SECCIÓN DE HISTORIAS --- */
+.encabezado_seccion {
+  border-bottom: 1px solid var(--borde_normal);
+  padding-bottom: 10px;
+}
+
+.titulo_seccion {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto_secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Grilla de tarjetas de historias */
+.grilla_historias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+/* Hereda de .tarjeta, agrega comportamiento interactivo */
+.tarjeta_historia {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.tarjeta_historia:hover {
+  border-color: var(--borde_resaltado);
+}
+
+/* Texto tenue */
+.texto_tenue {
+  color: var(--texto_tenue);
+  font-size: 13px;
+}
+
+/* --- TARJETAS DE HISTORIAS --- */
+
+/* Encabezado de la tarjeta: estado y puntos en la misma línea */
+.tarjeta_historia_encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Título de la historia */
+.historia_titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto_principal);
+  line-height: 1.4;
+}
+
+/* Descripción corta */
+.historia_descripcion {
+  font-size: 12px;
+  color: var(--texto_secundario);
+  line-height: 1.5;
+  /* Limita a 2 líneas y agrega "..." si es muy larga */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Pie de la tarjeta: sprint y responsable */
+.tarjeta_historia_pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--borde_normal);
+}
+
+.historia_sprint {
+  font-size: 11px;
+  color: var(--texto_tenue);
+}
+
+.historia_responsable {
+  font-size: 11px;
+  color: var(--texto_tenue);
+}
+
+/* Puntos de la historia */
+.historia_puntos {
+  font-size: 11px;
+  font-family: var(--fuente_codigo);
+  color: var(--texto_tenue);
+}
+
+/* --- PÍLDORAS DE ESTADO --- */
+/* Pequeña etiqueta de color que indica el estado de la historia */
+.pastilla_estado {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radio_xl);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Cada estado hereda colores de las clases que ya definimos */
+.pastilla_estado.estado_nueva       { color: var(--color_nueva);        background-color: var(--fondo_nueva); }
+.pastilla_estado.estado_activa      { color: var(--color_activa);       background-color: var(--fondo_activa); }
+.pastilla_estado.estado_finalizada  { color: var(--color_finalizada);   background-color: var(--fondo_finalizada); }
+.pastilla_estado.estado_impedimento { color: var(--color_impedimento);  background-color: var(--fondo_impedimento); }
+
+/* --- FORMULARIOS --- */
+
+/* Contenedor del formulario */
+.formulario_seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Grilla de campos del formulario */
+.formulario_grilla {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* Campo que ocupa el ancho completo */
+.campo_completo {
+  grid-column: 1 / -1;
+}
+
+/* Cada campo individual */
+.campo_formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Etiqueta del campo */
+.etiqueta_campo {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto_secundario);
+}
+
+/* Input y select */
+.input_campo {
+  background-color: var(--bg_input);
+  border: 1px solid var(--borde_normal);
+  border-radius: var(--radio_md);
+  color: var(--texto_principal);
+  font-size: 13px;
+  font-family: var(--fuente_principal);
+  padding: 7px 12px;
+  transition: border-color 150ms ease;
+  width: 100%;
+}
+
+.input_campo:focus {
+  outline: none;
+  border-color: var(--borde_resaltado);
+}
+
+.input_campo::placeholder {
+  color: var(--texto_tenue);
+}
+
+/* Para que el select se vea igual que el input */
+select.input_campo {
+  cursor: pointer;
+}
+
+/* Fila de botones del formulario */
+.formulario_acciones {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mensaje de éxito o error */
+.mensaje_formulario {
+  font-size: 12px;
+}
+
+.mensaje_formulario.exito { color: var(--acento_texto); }
+.mensaje_formulario.error { color: var(--color_impedimento); }
+
+
+/* --- BOTONES --- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: var(--radio_md);
+  border: 1px solid var(--borde_normal);
+  background-color: var(--fondo_secundario);
+  color: var(--texto_principal);
+  font-size: 13px;
+  font-family: var(--fuente_principal);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.boton:hover {
+  background-color: var(--fondo_hover);
+  border-color: var(--borde_resaltado);
+}
+
+.boton_primario {
+  background-color: var(--acento);
+  border-color: var(--acento_hover);
+  color: #ffffff;
+}
+
+.boton_primario:hover {
+  background-color: var(--acento_hover);
+}
+
+.boton_peligro {
+  background-color: transparent;
+  border-color: var(--borde_normal);
+  color: var(--color_impedimento);
+}
+
+.boton_peligro:hover {
+  background-color: var(--fondo_impedimento);
+  border-color: var(--color_impedimento);
+}
+
+.boton_sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+
+/* --- GRILLA DE SPRINTS --- */
+
+.grilla_sprints {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+/* Tarjeta de cada sprint */
+.tarjeta_sprint {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tarjeta_sprint_encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sprint_nombre {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto_principal);
+}
+
+.sprint_fechas {
+  font-size: 11px;
+  color: var(--texto_tenue);
+  font-family: var(--fuente_codigo);
+}
+
+.sprint_objetivo {
+  font-size: 12px;
+  color: var(--texto_secundario);
+  line-height: 1.5;
+}
+
+.tarjeta_sprint_pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--borde_normal);
+}
+
+/* Píldora de estado del sprint */
+.estado_sprint_planeado  { color: var(--color_nueva);        background-color: var(--fondo_nueva); }
+.estado_sprint_activo    { color: var(--color_activa);       background-color: var(--fondo_activa); }
+.estado_sprint_finalizado{ color: var(--color_finalizada);   background-color: var(--fondo_finalizada); }
+.estado_sprint_cancelado { color: var(--color_impedimento);  background-color: var(--fondo_impedimento); }

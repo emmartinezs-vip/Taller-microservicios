@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sprints — Gestor HU</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <!-- Contenedor principal -->
+  <div class="contenedor_app">
+
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
+    <aside class="barra_lateral">
+
+      <div class="barra_lateral_encabezado">
+        <div class="barra_lateral_logo">GH</div>
+        <span class="barra_lateral_nombre">Gestor <span>HU</span></span>
+      </div>
+
+      <nav class="barra_lateral_nav">
+        <a href="../index.html" class="enlace_nav">Dashboard</a>
+        <a href="sprints.html" class="enlace_nav activo">Sprints</a>
+        <a href="historias.html" class="enlace_nav">Historias</a>
+        <a href="responsables.html" class="enlace_nav">Responsables</a>
+        <a href="reportes.html" class="enlace_nav">Reportes</a>
+      </nav>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenido_principal">
+
+      <!-- Barra superior -->
+      <div class="barra_superior">
+        <h1>Sprints</h1>
+        <p>Gestiona los períodos de trabajo del proyecto</p>
+      </div>
+
+      <!-- Cuerpo de la página -->
+      <div class="cuerpo_pagina">
+
+        <!-- FORMULARIO PARA CREAR SPRINT -->
+        <div class="tarjeta formulario_seccion">
+
+          <div class="encabezado_seccion">
+            <span class="titulo_seccion">Nuevo Sprint</span>
+          </div>
+
+          <div class="formulario_grilla">
+
+            <div class="campo_formulario">
+              <label class="etiqueta_campo" for="nombre_sprint">Nombre</label>
+              <input class="input_campo" type="text" id="nombre_sprint"
+                placeholder="Ej: Sprint 1" />
+            </div>
+
+            <div class="campo_formulario">
+              <label class="etiqueta_campo" for="estado_sprint">Estado</label>
+              <select class="input_campo" id="estado_sprint">
+                <option value="Planeado">Planeado</option>
+                <option value="Activo">Activo</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Cancelado">Cancelado</option>
+              </select>
+            </div>
+
+            <div class="campo_formulario">
+              <label class="etiqueta_campo" for="fecha_inicio_sprint">Fecha inicio</label>
+              <input class="input_campo" type="date" id="fecha_inicio_sprint" />
+            </div>
+
+            <div class="campo_formulario">
+              <label class="etiqueta_campo" for="fecha_fin_sprint">Fecha fin</label>
+              <input class="input_campo" type="date" id="fecha_fin_sprint" />
+            </div>
+
+            <div class="campo_formulario campo_completo">
+              <label class="etiqueta_campo" for="objetivo_sprint">Objetivo</label>
+              <input class="input_campo" type="text" id="objetivo_sprint"
+                placeholder="Ej: Implementar módulo de autenticación" />
+            </div>
+
+          </div>
+
+          <div class="formulario_acciones">
+            <button class="boton boton_primario" id="btn_crear_sprint">
+              Crear Sprint
+            </button>
+            <span class="mensaje_formulario" id="mensaje_sprint"></span>
+          </div>
+
+        </div>
+
+        <!-- LISTA DE SPRINTS -->
+        <div class="encabezado_seccion">
+          <span class="titulo_seccion">Sprints registrados</span>
+        </div>
+
+        <!-- Aquí JavaScript insertará las tarjetas de sprints -->
+        <div class="grilla_sprints" id="lista_sprints">
+          <p class="texto_tenue">Cargando sprints...</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/api.js"></script>
+  <script src="../js/sprints.js"></script>
+
+</body>
+</html>
